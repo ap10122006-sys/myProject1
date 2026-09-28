@@ -13,20 +13,24 @@ export class Game {
 
         this.speed = 150;
         this.direction = "RIGHT";
-        this.nextDirection = "UP";
+        this.nextDirection = "DOWN";
 
         this.running = true;
     }
+    setDirection(direction) {
+        this.nextDirection = direction;
+    }
+
     update() {
         if (this.running === false) return;
         this.direction = this.nextDirection;
-       /* const movement = {
+        const movement = {
 
             UP: { x: 0, y: -1 },
             DOWN: { x: 0, y: 1 },
             LEFT: { x: -1, y: 0 },
             RIGHT: { x: 1, y: 0 }
-        };*/
+        };   
         const head = this.snake.getHead();
         const newHead = {
             x:

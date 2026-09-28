@@ -1,4 +1,5 @@
 import { Game } from './game.js';
+import { setupInput } from './input.js';
 
 const board = document.getElementById('game-board');
 
@@ -29,7 +30,6 @@ const Render = () => {
             "food"
         );
     }
-    //snake 
     game.snake
         .getBody()
         .forEach(
@@ -52,15 +52,17 @@ const Render = () => {
 const startGame = () => {
     clearInterval(interval);
 
+    // Create a fresh game instance and board.
     game = new Game();
 
     createBoard();
     Render();
 
+    // Update and render the game at the configured speed.
     interval = setInterval(() => {
         game.update();
         Render();
-
+        
         if (!game.running) {
 
             clearInterval(interval);
@@ -69,6 +71,10 @@ const startGame = () => {
 
     },
         game.speed
-    )
+    );
+
+    setupInput(direction => {
+        game.setDirection(direction);
+    });
 }
 startGame();
